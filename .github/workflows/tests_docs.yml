@@ -1,4 +1,4 @@
-name: tests
+name: Tests/Docs
 
 on:
   push:
@@ -48,5 +48,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Build docs
-        run: python -c "import biome.text; print(biome.text.__version__)"
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: setup python
+        uses: actions/setup-python@v2.1.4
+        with:
+          # Version range or exact version of a Python version to use, using SemVer's version range syntax.
+          python-version: 3.8.6
+          # The target architecture (x86, x64) of the Python interpreter.
+          #architecture: # optional
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: install pdoc
+        run: pip install pdoc
+      - name: build docs
+        run: make docs
