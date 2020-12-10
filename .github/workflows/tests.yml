@@ -38,7 +38,7 @@ jobs:
 #          # the discovery.type envionment
 #          discovery type: single-node # optional, default is single-node
       - name: install
-        run: make dev
+        run: echo "install"
 #      - name: pytest
 #        run: pytest
 
