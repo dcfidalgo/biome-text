@@ -1,11 +1,11 @@
 name: tests
 
-on: 
+on:
   push:
     branches:
       - master
   pull_request:
-    
+
 jobs:
   tests:
     name: Run pytest
@@ -21,23 +21,32 @@ jobs:
           python-version: 3.8.6
           # The target architecture (x86, x64) of the Python interpreter.
           #architecture: # optional
-      - name: Setup ElasticSearch
-        # You may pin to the exact commit or the version.
-        uses: getong/elasticsearch-action@v1.2
-        with:
-          # Version of elasticsearch to use
-          elasticsearch version: 7.4.2
-          # The port of host
-          host port: 9200 # optional, default is 9200
-          # The port of container
-          container port: 9200 # optional, default is 9200
-          # The port of host elasticsearch node port
-          host node port: 9300 # optional, default is 9300
-          # The port of elasticsearch node port
-          node port: 9300 # optional, default is 9300
-          # the discovery.type envionment
-          discovery type: single-node # optional, default is single-node
+#      - name: Setup ElasticSearch
+#        # You may pin to the exact commit or the version.
+#        uses: getong/elasticsearch-action@v1.2
+#        with:
+#          # Version of elasticsearch to use
+#          elasticsearch version: 7.4.2
+#          # The port of host
+#          host port: 9200 # optional, default is 9200
+#          # The port of container
+#          container port: 9200 # optional, default is 9200
+#          # The port of host elasticsearch node port
+#          host node port: 9300 # optional, default is 9300
+#          # The port of elasticsearch node port
+#          node port: 9300 # optional, default is 9300
+#          # the discovery.type envionment
+#          discovery type: single-node # optional, default is single-node
       - name: install
         run: make dev
-      - name: pytest
-        run: pytest
+#      - name: pytest
+#        run: pytest
+
+  docs:
+    name: Build docs
+    needs: tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build docs
+        run: python -c "import biome.text; print(biome.text.__version__)"
