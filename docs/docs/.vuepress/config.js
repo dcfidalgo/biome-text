@@ -1,8 +1,6 @@
 const path = require("path");
 const glob = require("glob")
 
-const baseContext = process.env.CONTEXT || 'docs/'
-
 function getSidebarChildren(location, replacement) {
     if (!replacement) {
         replacement = location
