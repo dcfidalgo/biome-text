@@ -86,6 +86,9 @@ jobs:
         if: ${{ github.event_name == 'release' }}
         # For tags $GITHUB_REF looks like refs/tags/<tag_name>
         run: echo BIOME_TEXT_DOC_VERSION_PATH=/${{ github.event.release.tag_name }}/ >> $GITHUB_ENV
+      - name: Ls dir
+        run: |
+          ls -l
       - name: Deploy Docs 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
